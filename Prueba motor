@@ -1,40 +1,36 @@
 /*
 
-PRUEBA CONTROL DEL MOTOR
- by MIGUETECNOLOGIA
+ PRUEBA CONTROL DEL MOTOR
+ by miguetecnologia
  MARZO 2018
 
 */
 // variables constantes para los pines XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
-const int controlPin1 = 2;           // 
-const int controlPin2 = 3;           // 
-const int enablePin = 9;             //
-const int directionSwitchPin = 4;    //
-const int onOffSwitchStatePin = 5;   //
-const int potPin = A0;               // 
+const int controlPin1 = 2;            
+const int controlPin2 = 3;           
+const int enablePin = 9;            
+const int directionSwitchPin = 4;    
+const int onOffSwitchStatePin = 5;   
 const int RedPin = 12;
 const int GreenPin = 11;
 
 // variables que pueden cambiar XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
-int onOffSwitchState = 0;
-int previousonOffSwitchState = 0;
-int directionSwitchState = 0;
-int previousdirectionSwitchState = 0;
+int onOffSwitchState = 0;              //Estado del interruptor
+int previousonOffSwitchState = 0;      //Estado previo del interruptor
+int directionSwitchState = 0;          //Estado sentido de giro
+int previousdirectionSwitchState = 0;  //Estado previo sentido de giro
 
-int motorEnabled = 0;
-int motorSpeed = 0;
-int motorDirection =1;
+int motorEnabled = 0;                  //Motor encendido
+int motorDirection =1;                 //Direccion del motor
 
 //Inicialiciamos y preparamos los valores XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 void setup() 
 {
-Serial.begin(9600);                           //Abre el puerto serie a 9600 bps
-
-pinMode(directionSwitchPin, INPUT);           //
-pinMode(onOffSwitchStatePin, INPUT);          //
+pinMode(directionSwitchPin, INPUT);           
+pinMode(onOffSwitchStatePin, INPUT);          
 pinMode(controlPin1, OUTPUT);
 pinMode(controlPin2, OUTPUT);
 pinMode(enablePin, OUTPUT);
@@ -52,7 +48,6 @@ void loop()
 onOffSwitchState=digitalRead(onOffSwitchStatePin);
 delay(1);
 directionSwitchState=digitalRead(directionSwitchPin);
-motorSpeed=analogRead(potPin)/4;
 
 if(onOffSwitchState !=previousonOffSwitchState){
   if(onOffSwitchState == HIGH){
