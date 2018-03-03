@@ -1,18 +1,14 @@
 /*
-
  Puerta automática temporizada
  by MIGUETECNOLOGIA
  MARZO 2018
-
 */
 // variables constantes para los pines XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 const int controlPin1 = 2;           // 
 const int controlPin2 = 3;           // 
 const int enablePin = 9;             //
-//const int directionSwitchPin = 4;    //
 const int onOffSwitchStatePin = 5;   //
-const int potPin = A0;               // 
 const int RedPin = 12;
 const int GreenPin = 11;
 
@@ -20,30 +16,19 @@ const int GreenPin = 11;
 
 int onOffSwitchState = 0;
 int previousonOffSwitchState = 0;
-//int directionSwitchState = 0;
-//int previousdirectionSwitchState = 0;
-
 int motorEnabled = 0;
-//int motorSpeed = 0;
-int motorDirection =1;
 
 //Inicialiciamos y preparamos los valores XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 void setup() 
 {
-Serial.begin(9600);                           //Abre el puerto serie a 9600 bps
-
-//pinMode(directionSwitchPin, INPUT);           //
-pinMode(onOffSwitchStatePin, INPUT);          //
+pinMode(onOffSwitchStatePin, INPUT);        
 pinMode(controlPin1, OUTPUT);
 pinMode(controlPin2, OUTPUT);
 pinMode(enablePin, OUTPUT);
-//pinMode(RedPin, OUTPUT);
-//pinMode(GreenPin, OUTPUT);
 
 digitalWrite(enablePin, LOW);
 }
-
 
 //La funcion loop o lazo se ejecuta consecutivamente XXXXXXXXXXXXXXXXXXXX
 
@@ -63,14 +48,22 @@ if(motorEnabled == 1){
   digitalWrite(enablePin, 1);
   digitalWrite(controlPin1, LOW);
   digitalWrite(controlPin2, HIGH);
+  digitalWrite(RedPin, LOW);
+  digitalWrite(GreenPin, HIGH);
   delay(4000);
   digitalWrite(controlPin1, LOW);
   digitalWrite(controlPin2, LOW);
+  digitalWrite(RedPin, LOW);
+  digitalWrite(GreenPin, HIGH);
   delay(4000);
   digitalWrite(controlPin1, HIGH);
   digitalWrite(controlPin2, LOW);
+  digitalWrite(RedPin, LOW);
+  digitalWrite(GreenPin, HIGH);
   delay(4000);
   motorEnabled=!motorEnabled;
+  digitalWrite(RedPin, HIGH);
+  digitalWrite(GreenPin, LOW);
  }
 else{
   digitalWrite(enablePin, 0);
