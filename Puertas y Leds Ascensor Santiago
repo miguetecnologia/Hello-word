@@ -1,0 +1,79 @@
+#include<Servo.h>
+Servo puerta1;
+Servo puerta2;
+Servo puerta3;
+boolean fc1=0;
+boolean fc2=0;
+boolean fc3=0;
+boolean pul=0;
+boolean pul2=0;
+boolean pul3=0;
+const int led1=2;
+const int led2=3;
+const int led3=4;
+int llamada=0;
+
+void setup() {
+  // put your setup code here, to run once:
+puerta1.attach(8);
+puerta2.attach(9);
+puerta3.attach(10);
+pinMode(5, INPUT_PULLUP); //fc1
+pinMode(6, INPUT_PULLUP);
+pinMode(7, INPUT_PULLUP);
+pinMode(11, INPUT_PULLUP);//pul
+pinMode(12, INPUT_PULLUP);
+pinMode(13, INPUT_PULLUP);
+pinMode(2, OUTPUT);       //led1
+pinMode(3, OUTPUT);
+pinMode(4, OUTPUT);
+Serial.begin(9600);
+puerta1.write(160);
+puerta2.write(160);
+puerta3.write(170);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  fc1=digitalRead(5);
+  fc2=digitalRead(6);
+  fc3=digitalRead(7);
+  pul=digitalRead(11);
+  pul2=digitalRead(12);
+  pul3=digitalRead(13);
+if(pul==HIGH){
+llamada=1;
+Serial.print(llamada=1);
+digitalWrite(led1, HIGH);
+digitalWrite(led2, LOW);
+digitalWrite(led3, LOW);
+puerta1.write(160);
+puerta2.write(160);
+puerta3.write(170);
+ }else if(pul2==HIGH){
+  Serial.print(llamada=2);
+digitalWrite(led1, LOW);
+digitalWrite(led2, HIGH);
+digitalWrite(led3, LOW);
+puerta1.write(160);
+puerta2.write(160);
+puerta3.write(170);
+ }else if(pul3==HIGH){
+  Serial.print(llamada=3);
+digitalWrite(led1, LOW);
+digitalWrite(led2, LOW);
+digitalWrite(led3, HIGH);
+puerta1.write(160);
+puerta2.write(160);
+puerta3.write(170);
+ }
+
+if(llamada==1 && fc1==LOW){
+  puerta1.write(10);
+}else if(llamada==2 && fc2==LOW){
+  puerta2.write(10);
+}else if(llamada==3 && fc3==LOW){
+  puerta3.write(10);
+}
+
+}
